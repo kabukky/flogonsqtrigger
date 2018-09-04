@@ -1,11 +1,11 @@
 {
   "name": "flogonsqtrigger",
   "type": "flogo:trigger",
-  "ref": "github.com/abasse/flogonsqtrigger",
+  "ref": "github.com/kabukky/flogonsqtrigger",
   "version": "0.0.1",
   "title": "Receive NSQ Messages",
   "description": "NSQ Message Trigger",
-  "homepage": "https://github.com/abasse/flogonsqtrigger",
+  "homepage": "https://github.com/kabukky/flogonsqtrigger",
   "output": [
     {
       "name": "message",
