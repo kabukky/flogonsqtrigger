@@ -59,11 +59,15 @@ func (t *NsqTrigger) Start() error {
 
 		config := nsq.NewConfig()
 		q, err := nsq.NewConsumer(topic, channel, config)
+		q.ChangeMaxInFlight(100)
+		q.AddConcurrentHandlers(
+			nsq.HandlerFunc(func(message *nsq.Message) error {
+				t.RunHandler(handler, string(message.Body))
+				return nil
+			}),
+			10,
+		)
 		t.consumers = append(t.consumers, q)
-		q.AddHandler(nsq.HandlerFunc(func(message *nsq.Message) error {
-			t.RunHandler(handler, string(message.Body))
-			return nil
-		}))
 
 		if err != nil {
 			log.Info("Could not add NSQ consumer: %s", err)
